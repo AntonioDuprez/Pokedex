@@ -11,7 +11,7 @@ export class DatosService {
 
   instanciarDatos(){
     this.http.get("assets/data/config.json").subscribe(data => {
-      console.log(data.json());
+      // console.log(data.json());
       this.info = data.json();
     });
   }

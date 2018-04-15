@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="card col-4 text-center" style="width: 18rem;" *ngFor="let pokemon of _ps.info">
+    <img class="card-img-top align-self-center" src="https://firebasestorage.googleapis.com/v0/b/pokedex-44774.appspot.com/o/{{ pokemon.image }}"
+      [alt]="pokemon.name">
+    <div class="card-body">
+      <h5 class="card-title">{{ pokemon.name }}</h5>
+      <p class="card-text">
+        <strong>Species:</strong> {{ pokemon.species }}</p>
+      <span [ngStyle]="{'background-color':  buscarColorTipo(pokemon.type[0]), 
+                        'border-color': buscarColorTipo(pokemon.type[0]) }" class="btn btn-success"> {{ pokemon.type[0] }}</span>
+      <span *ngIf=" pokemon.type[1] " [ngStyle]="{'background-color':  buscarColorTipo(pokemon.type[1]), 
+            'border-color': buscarColorTipo(pokemon.type[1]) }" class="btn btn-success"> {{ pokemon.type[1] }}</span>
+
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" attr.data-target="#{{pokemon.name}}">
+        <i class="material-icons">&#xE88E;</i>
+      </button>
+
+      <!-- Modal -->
+      <div class="modal fade" [id]="pokemon.name" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">{{ pokemon.name }}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="alert alert-dark" role="alert">
+                <p>Altura: {{ pokemon.height }}</p>
+                <p>Peso: {{ pokemon.weight }}</p>
+              </div>
+              <div class="alert alert-dark" role="alert">
+                <h3>Stats</h3>
+                <p>Hp: {{ pokemon.stats.hp }}</p>
+                <p>Attack: {{ pokemon.stats.attack }}</p>
+                <p>Defense: {{ pokemon.stats.defense }}</p>
+                <p>Sp-atk: {{ pokemon.stats.sp-atk }}</p>
+                <p>Sp-def: {{ pokemon.stats.sp-def }}</p>
+                <p>Speed: {{ pokemon.stats.speed }}</p>
+                <p>Total: {{ pokemon.stats.total }}</p>
+              </div>
+              <div class="alert alert-dark" role="alert">
+                <h3>Evolution</h3>
+                <span *ngFor="let evolucion of pokemon.evolution"> {{ evolucion }} </span>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
